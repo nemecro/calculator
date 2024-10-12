@@ -45,6 +45,9 @@ const operate = function(num1, operator, num2){
 
 let cleared = true;
 const reset = function(){
+    number1 = null;
+    number2 = null;
+    operator = null;
     cleared = true;
     decimalPressed = false;
     firstOperator = true;
