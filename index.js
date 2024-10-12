@@ -141,6 +141,7 @@ buttons.forEach(button => {
                 }
                 console.log(`${number1} ${operator} ${number2}`);
                 let result = operate(number1, operator, number2);
+                result = result.toFixed(2);
                 reset();
                 // DISTINGUISH BETWEEN SECOND OPERATOR
                 switch(button.textContent){
