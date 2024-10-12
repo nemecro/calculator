@@ -1,6 +1,11 @@
-let number1;
-let number2;
-let operator;
+let number1 = null;
+let number2 = null;
+let operator = null;
+
+let cleared = true;
+
+const calculatorDisplay = document.querySelector('#calculator-display');
+let buttons = document.querySelectorAll('button');
 
 const add = function(a, b){
     return parseFloat(a) + parseFloat(b);
@@ -39,5 +44,23 @@ const operate = function(num1, operator, num2){
             return 'invalid operator';
     }
 }
+
+// add event listener for each button
+buttons.forEach(button => {
+    // each button when clicked does something
+    button.addEventListener('click', () => {
+        // based on the button clicked, do something
+        // if operand is clicked
+        if (button.classList.contains('operand')){
+            // default setting or when AC pressed - override the zero
+            if (cleared){
+                calculatorDisplay.textContent = button.textContent;
+                cleared = false;
+            } else {
+                calculatorDisplay.textContent += button.textContent;
+            }
+        }
+    })
+})
 
 
