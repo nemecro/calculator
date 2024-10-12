@@ -133,15 +133,16 @@ buttons.forEach(button => {
                 let arrFirstPart = calculatorDisplay.textContent.split(' ');
                 number1 = arrFirstPart[0];
                 operator = arrFirstPart[1];
-                let arrSecondPart = calculatorDisplay.textContent.split(' ');
-                number2 = arrSecondPart.slice(arrSecondPart.indexOf(operator) + 1)[0];
+                number2 = arrFirstPart.slice(arrFirstPart.indexOf(operator) + 1)[0];
                 if (number2.includes('(')){
                     number2 = number2.replace('(', '');
                     number2 = number2.replace(')', '');
                 }
                 console.log(`${number1} ${operator} ${number2}`);
                 let result = operate(number1, operator, number2);
-                result = result.toFixed(2);
+                if (!Number.isInteger(result)){
+                    result = result.toFixed(2);
+                }
                 reset();
                 // DISTINGUISH BETWEEN SECOND OPERATOR
                 switch(button.textContent){
