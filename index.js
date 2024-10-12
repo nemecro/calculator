@@ -19,7 +19,7 @@ const multiply = function(a, b){
 
 const divide = function(a, b){
     if (b == 0){
-        return undefined;
+        return 'ERROR';
     }
     return parseFloat(a) / parseFloat(b);
 }
@@ -64,6 +64,11 @@ buttons.forEach(button => {
         // based on the button clicked, do something
         // if operand is clicked
         if (button.classList.contains('operand')){
+            // check for error
+            if (calculatorDisplay.textContent == 'ERROR'){
+                calculatorDisplay.textContent = button.textContent;
+                return 0;
+            }
             // default setting or when AC pressed - override the zero
             if (cleared){
                 // CHECK IF . PRESSED
@@ -123,6 +128,9 @@ buttons.forEach(button => {
         if (button.classList.contains('operator')){
             // CHECK IF IT IS THE FIRST
             if (firstOperator){
+                if (button.textContent == '='){
+                    return 0;
+                }
                 // add the space here so I can split it into an array
                 // SET CLEARED INTO FALSE in any case
                 cleared = false;
@@ -138,10 +146,11 @@ buttons.forEach(button => {
                     number2 = number2.replace('(', '');
                     number2 = number2.replace(')', '');
                 }
-                console.log(`${number1} ${operator} ${number2}`);
                 let result = operate(number1, operator, number2);
-                if (!Number.isInteger(result)){
-                    result = result.toFixed(2);
+                if (result != 'ERROR'){
+                    if (!Number.isInteger(result)){
+                        result = result.toFixed(2);
+                    }
                 }
                 reset();
                 // DISTINGUISH BETWEEN SECOND OPERATOR
