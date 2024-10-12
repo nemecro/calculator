@@ -52,7 +52,7 @@ button {
     cursor: pointer;
 }
 
-#zero {
+#zero, #ac {
     flex: 2.25;
 }
 
