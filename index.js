@@ -176,7 +176,6 @@ buttons.forEach(button => {
                     number2 = number2.replace('(', '');
                     number2 = number2.replace(')', '');
                 }
-                console.log(`${number1} ${operator} ${number2}`);
                 let result = operate(number1, operator, number2);
                 if (result != 'ERROR'){
                     if (!Number.isInteger(result)){
