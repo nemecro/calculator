@@ -2,8 +2,6 @@ let number1 = null;
 let number2 = null;
 let operator = null;
 
-let cleared = true;
-
 const calculatorDisplay = document.querySelector('#calculator-display');
 let buttons = document.querySelectorAll('button');
 
@@ -29,26 +27,32 @@ const divide = function(a, b){
 const operate = function(num1, operator, num2){
     switch (operator){
         case '+': 
-            add(num1, num2);
+            return add(num1, num2);
             break;
         case '-':
-            subtract(num1, num2);
+            return subtract(num1, num2);
             break;
         case '*':
-            multiply(num1, num2);
+            return multiply(num1, num2);
             break;
         case '/':
-            divide(num1, num2);
+            return divide(num1, num2);
             break;
         default:
             return 'invalid operator';
     }
 }
 
+let cleared = true;
+const reset = function(){
+    cleared = true;
+    decimalPressed = false;
+    firstOperator = true;
+}
 // check if the negative sign was applied to the number
 let negative = false;
 // check if the first operator was pressed
-let firstOperator = false;
+let firstOperator = true;
 // check if the decimal was pressed
 let decimalPressed = false;
 // add event listener for each button
@@ -89,8 +93,7 @@ buttons.forEach(button => {
         // MISC functions section
         // clear the display
         if (button.textContent == 'AC'){
-            cleared = true;
-            decimalPressed = false;
+            reset();
             calculatorDisplay.textContent = '0';
         }
 
@@ -107,9 +110,25 @@ buttons.forEach(button => {
 
         // OPERATORs section
         if (button.classList.contains('operator')){
-            // only make operations when cleared was overwritten
-            if (!cleared){
-
+            let arrFirstPart;
+            // CHECK IF IT IS THE FIRST
+            if (firstOperator){
+                // add the space here so I can split it into an array
+                // SET CLEARED INTO FALSE in any case
+                cleared = false;
+                firstOperator = false;
+                calculatorDisplay.textContent += ` ${button.textContent} `;
+                arrFirstPart = calculatorDisplay.textContent.split(' ');
+                number1 = arrFirstPart[0];
+                operator = arrFirstPart[1];
+            } else {
+                let arrSecondPart = calculatorDisplay.textContent.split(' ');
+                number2 = arrSecondPart.slice(arrSecondPart.indexOf(operator) + 1)[0];
+                // MAKE THE CALCULATION
+                console.log(`${number1} ${operator} ${number2}`);
+                let result = operate(number1, operator, number2)
+                console.log(result);
+                calculatorDisplay.textContent = result;
             }
         }
 
