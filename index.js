@@ -39,6 +39,8 @@ const operate = function(num1, operator, num2){
     }
 }
 
+// const operators = ['+', '-', '*', '/']
+
 let cleared = true;
 const reset = function(){
     number1 = null;
@@ -105,6 +107,44 @@ buttons.forEach(button => {
             calculatorDisplay.textContent = '0';
         }
 
+        // C button
+        function remove(arr, removed){
+            switch(removed){
+                case '.':
+                    decimalPressed = false;
+                    break;
+                case '+' || '-' || '*' || '/':
+                    firstOperator = true;
+                    arr.pop();
+                    break;
+                case ' ':
+                    removed = arr.pop();
+                    remove(arr, removed);
+            }
+        }
+        if (button.textContent == 'C'){
+            let displayArr = calculatorDisplay.textContent.split('');
+            let removed = displayArr.pop();
+            remove(displayArr, removed);
+            /* switch(removed){
+                case '.':
+                    decimalPressed = false;
+                    break;
+                case '+' || '-' || '*' || '/':
+                    firstOperator = true;
+                    break;
+                case ' ':
+                    removed = displayArr.pop();
+            } */
+            if (displayArr.length < 1){
+                cleared = true;
+                reset();
+                calculatorDisplay.textContent = '0';
+            } else {
+                calculatorDisplay.textContent = displayArr.join('');
+            }
+        }
+
         if (button.textContent == '+ / -'){
             //
             if (negative == false){
@@ -146,6 +186,7 @@ buttons.forEach(button => {
                     number2 = number2.replace('(', '');
                     number2 = number2.replace(')', '');
                 }
+                console.log(`${number1} ${operator} ${number2}`);
                 let result = operate(number1, operator, number2);
                 if (result != 'ERROR'){
                     if (!Number.isInteger(result)){
@@ -153,6 +194,9 @@ buttons.forEach(button => {
                     }
                 }
                 reset();
+                if (result < 0){
+                    negative = true;
+                }
                 // DISTINGUISH BETWEEN SECOND OPERATOR
                 switch(button.textContent){
                     case '=':
@@ -169,5 +213,4 @@ buttons.forEach(button => {
         }
     })
 })
-
 
