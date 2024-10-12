@@ -204,3 +204,26 @@ buttons.forEach(button => {
     })
 })
 
+let allowed = [];
+buttons.forEach(button => {
+    allowed.push(button.textContent)
+})
+
+document.addEventListener('keydown', keyPressed);
+function keyPressed (e){
+    if (allowed.includes(e.key) || e.key == 'Enter' || e.key == 'Backspace'){
+        let pressed = e.key;
+        if (pressed == 'Enter'){
+            pressed = '=';
+        } else if (pressed == 'Backspace'){
+            pressed = 'C';
+        }
+        // click event on button that matches the key
+        let buttonMatch;
+        buttons.forEach(button => {
+            if (button.textContent == pressed){
+                button.click();
+            }
+        })
+    }
+}
