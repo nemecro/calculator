@@ -126,16 +126,6 @@ buttons.forEach(button => {
             let displayArr = calculatorDisplay.textContent.split('');
             let removed = displayArr.pop();
             remove(displayArr, removed);
-            /* switch(removed){
-                case '.':
-                    decimalPressed = false;
-                    break;
-                case '+' || '-' || '*' || '/':
-                    firstOperator = true;
-                    break;
-                case ' ':
-                    removed = displayArr.pop();
-            } */
             if (displayArr.length < 1){
                 cleared = true;
                 reset();
