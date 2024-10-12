@@ -177,12 +177,13 @@ buttons.forEach(button => {
                     number2 = number2.replace(')', '');
                 }
                 let result = operate(number1, operator, number2);
+                reset();
                 if (result != 'ERROR'){
                     if (!Number.isInteger(result)){
                         result = result.toFixed(2);
+                        decimalPressed = true;
                     }
                 }
-                reset();
                 if (result < 0){
                     negative = true;
                 }
