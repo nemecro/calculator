@@ -45,6 +45,10 @@ const operate = function(num1, operator, num2){
     }
 }
 
+// check if the negative sign was applied to the number
+let negative = false;
+// check if the first operator was pressed
+let firstOperator = false;
 // add event listener for each button
 buttons.forEach(button => {
     // each button when clicked does something
@@ -53,6 +57,8 @@ buttons.forEach(button => {
         // if operand is clicked
         if (button.classList.contains('operand')){
             // default setting or when AC pressed - override the zero
+
+
             if (cleared){
                 calculatorDisplay.textContent = button.textContent;
                 cleared = false;
@@ -61,10 +67,33 @@ buttons.forEach(button => {
             }
         }
 
+        // MISC functions section
+        // clear the display
         if (button.textContent == 'AC'){
             cleared = true;
             calculatorDisplay.textContent = 0;
         }
+
+        if (button.textContent == '+ / -'){
+            //
+            if (negative == false){
+                calculatorDisplay.textContent = '-' + calculatorDisplay.textContent;
+                negative = true;
+            } else {
+                console.log('remove -');
+                calculatorDisplay.textContent = calculatorDisplay.textContent.substring(1, calculatorDisplay.textContent.length)
+                negative = false;
+            }
+        }
+
+        // OPERATORs section
+        if (button.classList.contains('operator')){
+            // only make operations when cleared was overwritten
+            if (!cleared){
+
+            }
+        }
+
     })
 })
 
