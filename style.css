@@ -32,8 +32,11 @@ main {
     border: 2px solid rgb(0, 0, 0);
     height: 75px;
     padding: 5px;
-    font-size: 1.75rem;
+    font-size: 34px;
     border-radius: 6px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 .row {
@@ -46,6 +49,7 @@ button {
     display: block;
     flex: 1;
     border-radius: 6px;
+    cursor: pointer;
 }
 
 #zero {
