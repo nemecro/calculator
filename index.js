@@ -49,6 +49,8 @@ const operate = function(num1, operator, num2){
 let negative = false;
 // check if the first operator was pressed
 let firstOperator = false;
+// check if the decimal was pressed
+let decimalPressed = false;
 // add event listener for each button
 buttons.forEach(button => {
     // each button when clicked does something
@@ -57,21 +59,39 @@ buttons.forEach(button => {
         // if operand is clicked
         if (button.classList.contains('operand')){
             // default setting or when AC pressed - override the zero
-
-
             if (cleared){
-                calculatorDisplay.textContent = button.textContent;
+                // CHECK IF . PRESSED
+                if (button.textContent == '.'){
+                    calculatorDisplay.textContent += button.textContent;
+                    decimalPressed = true;
+                } else {
+                    calculatorDisplay.textContent = button.textContent;
+                }
                 cleared = false;
+            // IF NOT CLEARED
             } else {
-                calculatorDisplay.textContent += button.textContent;
+                // WAS DECIMAL PRESSED
+                if (button.textContent == '.'){
+                    // WAS IT PRESSED BEFORE
+                    if (!decimalPressed){
+                        calculatorDisplay.textContent += button.textContent;
+                        decimalPressed = true;
+                    }
+                // ANYTHING ELSE PRESSED? 
+                } else {
+                    calculatorDisplay.textContent += button.textContent;
+                }
             }
+
+
         }
 
         // MISC functions section
         // clear the display
         if (button.textContent == 'AC'){
             cleared = true;
-            calculatorDisplay.textContent = 0;
+            decimalPressed = false;
+            calculatorDisplay.textContent = '0';
         }
 
         if (button.textContent == '+ / -'){
@@ -80,7 +100,6 @@ buttons.forEach(button => {
                 calculatorDisplay.textContent = '-' + calculatorDisplay.textContent;
                 negative = true;
             } else {
-                console.log('remove -');
                 calculatorDisplay.textContent = calculatorDisplay.textContent.substring(1, calculatorDisplay.textContent.length)
                 negative = false;
             }
