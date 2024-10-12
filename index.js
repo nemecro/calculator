@@ -54,6 +54,7 @@ const reset = function(){
 }
 // check if the negative sign was applied to the number
 let negative = false;
+let negativeSecond = false;
 // check if the first operator was pressed
 let firstOperator = true;
 // check if the decimal was pressed
@@ -104,7 +105,12 @@ buttons.forEach(button => {
         if (button.textContent == '+ / -'){
             //
             if (negative == false){
-                calculatorDisplay.textContent = '-' + calculatorDisplay.textContent;
+                let displayArray = calculatorDisplay.textContent.split(' ');
+                if (!negativeSecond){
+                    displayArray.unshift('-');
+                    calculatorDisplay.textContent = displayArray.join('');
+                    console.log(displayArray);
+                } 
                 negative = true;
             } else {
                 calculatorDisplay.textContent = calculatorDisplay.textContent.substring(1, calculatorDisplay.textContent.length)
@@ -125,6 +131,7 @@ buttons.forEach(button => {
                 arrFirstPart = calculatorDisplay.textContent.split(' ');
                 number1 = arrFirstPart[0];
                 operator = arrFirstPart[1];
+                negativeSecond = true;
             } else {
                 let arrSecondPart = calculatorDisplay.textContent.split(' ');
                 number2 = arrSecondPart.slice(arrSecondPart.indexOf(operator) + 1)[0];
