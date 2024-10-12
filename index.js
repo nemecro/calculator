@@ -219,7 +219,6 @@ function keyPressed (e){
             pressed = 'C';
         }
         // click event on button that matches the key
-        let buttonMatch;
         buttons.forEach(button => {
             if (button.textContent == pressed){
                 button.click();
