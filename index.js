@@ -48,9 +48,9 @@ const reset = function(){
     number1 = null;
     number2 = null;
     operator = null;
-    cleared = true;
     decimalPressed = false;
     firstOperator = true;
+    negative = false;
 }
 // check if the negative sign was applied to the number
 let negative = false;
@@ -96,6 +96,7 @@ buttons.forEach(button => {
         // MISC functions section
         // clear the display
         if (button.textContent == 'AC'){
+            cleared = true;
             reset();
             calculatorDisplay.textContent = '0';
         }
@@ -127,11 +128,23 @@ buttons.forEach(button => {
             } else {
                 let arrSecondPart = calculatorDisplay.textContent.split(' ');
                 number2 = arrSecondPart.slice(arrSecondPart.indexOf(operator) + 1)[0];
-                // MAKE THE CALCULATION
                 console.log(`${number1} ${operator} ${number2}`);
-                let result = operate(number1, operator, number2)
-                console.log(result);
-                calculatorDisplay.textContent = result;
+                let result = operate(number1, operator, number2);
+                reset();
+                // DISTINGUISH BETWEEN SECOND OPERATOR
+                switch(button.textContent){
+                    case '=':
+                        calculatorDisplay.textContent = result;
+                        break;
+                    default:
+                        calculatorDisplay.textContent = `${result} ${button.textContent} `;
+                        firstOperator = false;
+                        arrFirstPart = calculatorDisplay.textContent.split(' ');
+                        number1 = arrFirstPart[0];
+                        operator = arrFirstPart[1];
+                }
+                // MAKE THE CALCULATION
+
             }
         }
 
