@@ -60,6 +60,11 @@ buttons.forEach(button => {
                 calculatorDisplay.textContent += button.textContent;
             }
         }
+
+        if (button.textContent == 'AC'){
+            cleared = true;
+            calculatorDisplay.textContent = 0;
+        }
     })
 })
 
