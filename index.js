@@ -35,7 +35,7 @@ const operate = function(num1, operator, num2){
         case '/':
             return divide(num1, num2);
         default:
-            return 'invalid operator';
+            return 'ERROR';
     }
 }
 
@@ -177,6 +177,13 @@ buttons.forEach(button => {
                     number2 = number2.replace(')', '');
                 }
                 let result = operate(number1, operator, number2);
+                // fix error when user either types two operators when the calculator is reset 
+                // or types one operand and then two operators instead of a single operand
+                if (result == 'ERROR' || isNaN(result)){
+                    calculatorDisplay.textContent = 'ERROR';
+                    reset();
+                    return 0;
+                }
                 reset();
                 if (result != 'ERROR'){
                     if (!Number.isInteger(result)){
