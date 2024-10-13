@@ -30,8 +30,8 @@ I'm aware there are many bugs and overall I wish I could come up with a complete
 During making the project I experienced something I would call *conditional hell*, I found myself completely lost writing one if statement after another... There were simply many cases and problems that could occur.
 
 My solution uses the calculatorDisplay as a variable that keeps track of what the user inputs.
-When an = sign or second operator is pressed it displays the result.
+When an *= sign* or *second operator* is pressed it displays the result.
 
-To calculate the result, the calculatorDisplay.textContent is then split into an array. Items are then copied to number1, operator and number2 functions. Then operate function is called and decides on what function to call based on the operator input.
+To calculate the result, the calculatorDisplay.textContent is then split into an array. Items are then copied to number1, operator and number2 variables. Then operate function is called and decides on what function to call based on the operator input.
 
 For now, I would not dare to call this project as FINISHED, rather a **WORK IN PROGRESS**. I believe I will return to it once I get better at JavaScript.
